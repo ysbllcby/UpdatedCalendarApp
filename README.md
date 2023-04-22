@@ -1,5 +1,7 @@
 # UpdatedCalendarApp
-## This shows the date selected by user.
+## Update:
+Logcat working, showing array of number input by user.
+Colors not changing, opt to encircle the days instead.
 
 #Important:
 This is an app that should reflect schedule depending on user input on shift.
