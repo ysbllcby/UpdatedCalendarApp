@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -55,7 +56,42 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String rotationInput = rotationEditText.getText().toString();
-                Log.d(TAG, "Rotation input: " + rotationInput);
+
+                // Split string into char
+                String[] rotationInputArr = rotationInput.split("");
+
+                // Convert each string to int and store in an integer array
+                int[] rotationInputArray = new int[rotationInputArr.length];
+                for (int i = 0; i < rotationInputArr.length; i++) {
+                    rotationInputArray[i] = Integer.parseInt(rotationInputArr[i]);
+                }
+                Log.d(TAG, "array: " + Arrays.toString(rotationInputArray));
+
+                // Change color in the Calendar
+                Calendar calendar = Calendar.getInstance();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                    try {
+                        calendar.setTime(dateFormat.parse(dateString));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    int numDays = rotationInputArray[0];
+                    int colorIndex = 1;
+                    for (int i = 0; i < numDays; i++) {
+                        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+                        if (dayOfWeek == Calendar.SATURDAY || dayOfWeek == Calendar.SUNDAY) {
+                            numDays++;
+                        } else {
+                            if (colorIndex % 2 == 0) {
+                                calendarView.setDateTextAppearance(R.style.BlueDate);
+                            } else {
+                                calendarView.setDateTextAppearance(R.style.YellowDate);
+                            }
+                            colorIndex++;
+                        }
+                        calendar.add(Calendar.DAY_OF_MONTH, 1);
+                    }
             }
         });
     }
