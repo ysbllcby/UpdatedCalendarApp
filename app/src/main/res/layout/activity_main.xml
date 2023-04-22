@@ -10,21 +10,54 @@
         android:id="@+id/calendarView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/selectedDateTextView"
+        app:layout_constraintVertical_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/selectedDateTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:text="Selected date: "
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="18sp"
+        android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/calendarView"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintStart_toStartOf="@id/calendarView"
+        app:layout_constraintEnd_toEndOf="@id/calendarView"
+        android:layout_marginTop="32dp" />
+
+    <TextView
+        android:id="@+id/inputTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="Input Shift Rotation: (Example: 2 days on, 3 days off, 4 days on should be input as 234)"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@id/selectedDateTextView" />
+
+    <EditText
+        android:id="@+id/rotationEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned"
+        android:padding="16dp"
+        android:text="234"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/calendarView"
+        app:layout_constraintTop_toBottomOf="@id/inputTextView" />
+
+    <Button
+        android:id="@+id/generateButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Generate"
+        app:layout_constraintStart_toStartOf="@id/calendarView"
+        app:layout_constraintTop_toBottomOf="@id/rotationEditText"
+        tools:layout_editor_absoluteX="159dp"
+        tools:layout_editor_absoluteY="565dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -16,6 +19,10 @@ public class MainActivity extends AppCompatActivity {
 
     private CalendarView calendarView;
     private TextView selectedDateTextView;
+    private EditText rotationEditText;
+    private Button generateButton;
+    private static final String TAG = "check";
+    private String dateString = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
         calendarView = findViewById(R.id.calendarView);
         selectedDateTextView = findViewById(R.id.selectedDateTextView);
+        rotationEditText = findViewById(R.id.rotationEditText);
+        generateButton = findViewById(R.id.generateButton);
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -34,11 +43,19 @@ public class MainActivity extends AppCompatActivity {
 
                 // Format the date as a string
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-                String dateString = dateFormat.format(selectedDate.getTime());
+                dateString = dateFormat.format(selectedDate.getTime());
 
-                // Log the selected date
+                // Show the selected date
                 selectedDateTextView.setText("Selected date: " + dateString);
 
+            }
+        });
+
+        generateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String rotationInput = rotationEditText.getText().toString();
+                Log.d(TAG, "Rotation input: " + rotationInput);
             }
         });
     }
